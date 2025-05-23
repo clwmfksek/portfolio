@@ -1,8 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
-import { isAdmin } from "@/lib/isAdmin";
-import { useRouter } from "next/navigation";
 
 interface Comment {
   id: string;

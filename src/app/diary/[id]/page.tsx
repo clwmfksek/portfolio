@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useParams } from "next/navigation";
+import type { User } from "@supabase/supabase-js";
 
 interface Diary {
   id: string;
@@ -22,13 +23,17 @@ export default function DiaryDetailPage() {
   const [diary, setDiary] = useState<Diary | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [content, setContent] = useState("");
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetchDiary();
-    fetchComments();
-    supabase.auth.getUser().then(({ data }) => setUser(data.user));
+    const fetchAll = async () => {
+      await fetchDiary();
+      await fetchComments();
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    };
+    fetchAll();
   }, [id]);
 
   async function fetchDiary() {

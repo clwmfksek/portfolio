@@ -1,23 +1,3 @@
-import Image from "next/image";
-
-const userInfo = {
-  name: "홍길동",
-  school: "한국대학교",
-  major: "컴퓨터공학과",
-  stack: ["Next.js", "TypeScript", "React", "TailwindCSS", "Supabase"],
-};
-
-const navCards = [
-  { title: "일기", description: "마크다운 기반 일기/블로그", href: "/diary" },
-  {
-    title: "프로젝트",
-    description: "내가 진행한 프로젝트들",
-    href: "/project",
-  },
-  { title: "About", description: "자기소개, 타임라인, 경력", href: "/about" },
-  { title: "목록(이웃)", description: "이웃 페이지로 이동", href: "/list" },
-];
-
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 gap-12 bg-[var(--background)]">
