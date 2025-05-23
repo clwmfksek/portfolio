@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import { StagewiseToolbar } from "@stagewise/toolbar-next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -11,6 +13,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const stagewiseConfig = { plugins: [] };
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +31,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        {process.env.NODE_ENV === "development" && (
+          <StagewiseToolbar config={stagewiseConfig} />
+        )}
+        <Navbar />
+        <div className="pt-16">{children}</div>
       </body>
     </html>
   );
